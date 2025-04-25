@@ -1,9 +1,75 @@
-<h1>Dashboard#show</h1>
-<p>Find me in app/views/dashboard/show.html.erb</p>
-<br>
-<%= link_to 'Sign Out', destroy_user_session_path, data: { turbo_method: :delete }, class: "logout" %>
-<br>
-<h1>Investment Portfolio</h1>
-<p>Welcome, <%= current_user.email %>!</p>
-<p>I will buy and sell stocks here</p>
-<p>Summary of Transactions</p>
+<!-- Header Container -->
+<div class="header">
+  <!-- Left: Username -->
+  <h1 class="username">Welcome, <%= current_user.email %>!</h1>
+
+  <!-- Right: Logout Button -->
+  <div class="logout-button">
+    <%= link_to 'Sign Out', destroy_user_session_path, data: { turbo_method: :delete }, class: "logout" %>
+  </div>
+</div>
+
+<!-- Stocks Container --> 
+<div class="stocks-container">
+    <div class="stocks-grid">
+        <div class="stocks-box">
+            <h2>Select Stocks</h2>
+            <br>
+                <% @stock_data.each do |symbol, data| %>
+                    <% meta = data["Meta Data"] || {} %>
+                    <% series = data["Time Series (Daily)"] || {} %>
+                    <% latest_time = series.keys.first %>
+                    <% latest_price = series[latest_time]["1. open"] rescue "N/A" %>
+
+                    <div class="stocks-list">
+                        <h3><%= symbol %>: $<%= latest_price %></h3>
+                    </div>
+                <% end %>
+        </div>
+
+        <div class="stocks-box">
+            <h2>My Investments</h2>
+                <table class="stock-table">
+                    <thead>
+                        <tr>
+                            <th>Stock</th>
+                            <th>Value</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>AAPL</td>
+                            <td>$150.00</td>
+                            <td>$3,000.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+        </div>
+    </div>
+    <br>
+    <div class="stocks-box">
+        <h2>Transactions</h2>
+        <table class="stock-table">
+            <thead>
+                <tr>
+                    <th>Action</th>
+                    <th>Stock</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Buy</td>
+                    <td>AAPL</td>
+                    <td>20</td>
+                    <td>$150.00</td>
+                    <td>$3,000.00</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
