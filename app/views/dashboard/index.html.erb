@@ -1,0 +1,122 @@
+<!-- Header Container -->
+<div class="header">
+  <!-- Left: Username -->
+  <h1 class="username">Welcome, <%= current_user.email %>!</h1>
+
+  <!-- Right: Logout Button -->
+  <div class="logout-button">
+    <%= link_to 'Sign Out', destroy_user_session_path, data: { turbo_method: :delete }, class: "logout" %>
+  </div>
+</div>
+
+<!-- Stocks Container --> 
+<div class="stocks-container">
+
+    <h2>
+        Cash Balance: <%= number_to_currency(current_user.cash_balance, precision: 2) %>
+    </h2>
+
+    <div class="stocks-grid">
+        <div class="stocks-box">
+            <h2>Select Stocks</h2>
+            <div class="stock-form-container">
+                <%= form_with url: dashboard_path, method: :get, local: true, class: "stock-form" do %>
+                    <label for="symbols">Enter Stock Symbol:</label>
+                    <%= text_field_tag :symbols, nil, placeholder: "AAPL, GOOG, MSFT, AMZN, META, NFLX", class: "stock-input" %>
+                    <%= submit_tag "Get Prices", class: "stock-button" %>
+                <% end %>
+            <br>
+                <% if @stock_data %>
+                    <div class="stock-quote">
+                        <h3><%= @stock_data[:symbol] %>: $<%= @stock_data[:price] %></h3><br>
+
+                        <%= form_with url: transactions_path, method: :post, local: true, class: "transaction-form" do %>
+                        <%= hidden_field_tag :symbol, @stock_data[:symbol] %>
+                        <%= hidden_field_tag :price, @stock_data[:price] %>
+
+                        <label for="quantity">Quantity:</label>
+                        <%= number_field_tag :shares, 1, min: 1, class: "stock-input" %>
+
+                        <label for="transaction_type">Action:</label>
+                        <%= select_tag :transaction_type, options_for_select([["Buy", "buy"], ["Sell", "sell"]]), class: "stock-input" %>
+
+                        <%= submit_tag "Place Order", class: "stock-button" %>
+                        <% end %>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+
+        <div class="stocks-box">
+            <h2>My Investments</h2>
+
+            <% if @stocks && @stocks.any? %>
+            <table class="stock-table">
+                <thead>
+                    <tr>
+                        <th>Stocks</th>
+                        <th>Shares</th>
+                        <th>Current Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <% @stocks.each do |stock| %>
+                    <tr>
+                        <td><%= stock.symbol %></td>
+                        <td><%= stock.shares %></td>
+                        <td>
+                        <% if stock.shares.present? && @stock_prices[stock.symbol].present? %>
+                            $<%= sprintf("%.2f", stock.shares * @stock_prices[stock.symbol]) %>
+                        <% else %>
+                            Price Unavailable
+                        <% end %>
+                        </td>
+                    </tr>
+                <% end %>
+                </tbody>
+            </table>
+            <% else %>
+                <p>No investments yet.</p>
+            <% end %>
+            <br>
+            <%= link_to "View My Portfolio", stocks_path, class: "text-blue-500 underline" %>
+            <br>
+        </div>
+        
+    </div>
+    <br>
+    <div class="stocks-box">
+        <h2>Transactions</h2>
+        <% if @transactions && @transactions.any? %>
+            <table class="stock-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Symbol</th>
+                        <th>Action</th>
+                        <th>Shares</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <% @transactions.each do |transaction| %>
+                    <tr>
+                    <td><%= transaction.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+                    <td><%= transaction.symbol %></td>
+                    <td><%= transaction.transaction_type.capitalize %></td>
+                    <td><%= transaction.shares %></td>
+                    <td>$<%= sprintf("%.2f", transaction.price) %></td>
+                    <td>$<%= sprintf("%.2f", transaction.price * transaction.shares) %></td>
+                    </tr>
+                <% end %>
+                </tbody>
+            </table>
+            <% else %>
+            <p>No transactions yet.</p>
+        <% end %>
+        <br>
+            <%= link_to "View My Transactions", transactions_path, class: "text-blue-500 underline" %>
+        <br>
+    </div>
+</div>

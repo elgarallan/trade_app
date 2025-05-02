@@ -1,11 +1,15 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  stock: one
-  quantity: 1
+  user: one
+  symbol: MyString
+  transaction_type: MyString
+  shares: 1
   price: 9.99
 
 two:
-  stock: two
-  quantity: 1
+  user: two
+  symbol: MyString
+  transaction_type: MyString
+  shares: 1
   price: 9.99

@@ -1,0 +1,47 @@
+<!-- Header Container -->
+<div class="header">
+  <!-- Left: Username -->
+  <h1 class="username">Welcome, <%= current_user.email %>!</h1>
+
+  <!-- Right: Logout Button -->
+  <div class="logout-button">
+    <%= link_to 'Sign Out', destroy_user_session_path, data: { turbo_method: :delete }, class: "logout" %>
+  </div>
+</div>
+
+<div class="stocks-container">
+    <div class="stocks-box">
+            <h2>Transactions</h2>
+            <% if @transactions && @transactions.any? %>
+                <table class="stock-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Symbol</th>
+                            <th>Action</th>
+                            <th>Shares</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <% @transactions.each do |transaction| %>
+                        <tr>
+                        <td><%= transaction.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+                        <td><%= transaction.symbol %></td>
+                        <td><%= transaction.transaction_type.capitalize %></td>
+                        <td><%= transaction.shares %></td>
+                        <td>$<%= sprintf("%.2f", transaction.price) %></td>
+                        <td>$<%= sprintf("%.2f", transaction.price * transaction.shares) %></td>
+                        </tr>
+                    <% end %>
+                    </tbody>
+                </table>
+                <% else %>
+                <p>No transactions yet.</p>
+            <% end %>
+        </div>
+        <br>
+        <%= link_to "Back to My Dashboard", dashboard_path, class: "text-blue-500 underline" %>
+        <br>
+</div>
