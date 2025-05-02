@@ -6,4 +6,14 @@ class User < ApplicationRecord
 
   has_many :stocks
   has_many :transactions
+
+ # Admin role check
+ def admin?
+  admin
+ end
+
+# Optional: define trader? for clarity (non-admins are considered traders here)
+def trader?
+  !admin?
+ end
 end
