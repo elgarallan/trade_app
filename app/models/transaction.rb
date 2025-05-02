@@ -1,7 +1,10 @@
 class Transaction < ApplicationRecord
-  belongs_to :stock
+  belongs_to :user
 
-  validates :quantity, numericality: { greater_than: 0 }
-  validates :price, numericality: { greater_than: 0 }
-  validates :action, inclusion: { in: %w[buy sell] }
+  TRANSACTION_TYPES = %w[buy sell]
+
+  validates :transaction_type, presence: true, inclusion: { in: TRANSACTION_TYPES }
+  validates :symbol, presence: true
+  validates :shares, presence: true, numericality: { greater_than: 0 }
+  validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
 end
