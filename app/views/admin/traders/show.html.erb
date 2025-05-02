@@ -1,0 +1,10 @@
+<h2>Trader Details</h2>
+
+<p><strong>Email:</strong> <%= @trader.email %></p>
+<p><strong>Created at:</strong> <%= @trader.created_at.strftime("%B %d, %Y %I:%M %p") %></p>
+<p><strong>Admin:</strong> <%= @trader.admin? ? "Yes" : "No" %></p>
+
+<br>
+
+<%= link_to "Edit Trader", edit_admin_trader_path(@trader) %> |
+<%= link_to "Back to All Traders", admin_traders_path %>

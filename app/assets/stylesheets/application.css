@@ -15,3 +15,17 @@
     box-sizing: border-box;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
   }
+
+  .button {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+  }
+  
+  .button:hover {
+    background-color: #2980b9;
+  }
+  
