@@ -1,0 +1,36 @@
+<h2 class="page-title">Transaction Details</h2>
+
+<div class="transaction-details-box">
+  <div class="transaction-row">
+    <strong>Trader:</strong>
+    <span><%= @transaction.user.email %></span>
+  </div>
+
+  <div class="transaction-row">
+    <strong>Stock Symbol:</strong>
+    <span><%= @transaction.symbol %></span>
+  </div>
+
+  <div class="transaction-row">
+    <strong>Type:</strong>
+    <span><%= @transaction.transaction_type.capitalize %></span>
+  </div>
+
+  <div class="transaction-row">
+    <strong>Shares:</strong>
+    <span><%= @transaction.shares %></span>
+  </div>
+
+  <div class="transaction-row">
+    <strong>Price per Share:</strong>
+    <span><%= number_to_currency(@transaction.price) %></span>
+  </div>
+
+  <div class="transaction-row">
+    <strong>Date:</strong>
+    <span><%= @transaction.created_at.strftime("%B %d, %Y at %I:%M %p") %></span>
+  </div>
+
+  <br>
+  <%= link_to "← Back to All Transactions", admin_transactions_path, class: "button" %>
+</div>

@@ -12,7 +12,7 @@ class User < ApplicationRecord
   admin
  end
 
-# Optional: define trader? for clarity (non-admins are considered traders here)
+# (non-admins are considered traders here)
 def trader?
   !admin?
  end
