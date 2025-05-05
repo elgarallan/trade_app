@@ -1,0 +1,136 @@
+.form-wrapper {
+    max-width: 600px;
+    margin: 50px auto;
+    background: #f9fafb;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  }
+  
+  .form-wrapper h1 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #0f172a;
+  }
+  
+  .error-box {
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+  
+  .styled-form .form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .styled-form label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #1e293b;
+  }
+  
+  .styled-form input {
+    padding: 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    transition: all 0.3s;
+    font-size: 14px;
+  }
+  
+  .styled-form input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    outline: none;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .submit-btn {
+    background-color: #065ce7;
+    color: white;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  
+  .submit-btn:hover {
+    background-color: #2563eb;
+  }
+  
+  .cancel-btn {
+    padding: 10px 16px;
+    background: #e2e8f0;
+    border-radius: 8px;
+    color: #334155;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .cancel-btn:hover {
+    background: #cbd5e1;
+  }
+
+  .page-title {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 30px;
+    color: #0f172a;
+  }
+  
+  .transaction-details-box {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 25px 30px;
+    background: #f8fafc;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  }
+  
+  .transaction-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
+    font-size: 16px;
+    color: #1e293b;
+  }
+  
+  .transaction-row strong {
+    font-weight: 600;
+    width: 40%;
+  }
+  
+  .transaction-row span {
+    width: 55%;
+    text-align: right;
+  }
+  
+  .top-stocks li {
+    background: #ffffff;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .top-stocks li:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+  

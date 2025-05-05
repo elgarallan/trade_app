@@ -1,0 +1,31 @@
+<h2>All Transactions</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>User Email</th>
+      <th>Symbol</th>
+      <th>Type</th>
+      <th>Shares</th>
+      <th>Price</th>
+      <th>Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @transactions.each do |transaction| %>
+      <tr>
+        <td><%= transaction.user.email %></td>
+        <td><%= transaction.symbol %></td>
+        <td><%= transaction.transaction_type %></td>
+        <td><%= transaction.shares %></td>
+        <td><%= number_to_currency(transaction.price) %></td>
+        <td><%= transaction.created_at.strftime("%b %d, %Y %H:%M") %></td>
+        <td><%= link_to "View", admin_transaction_path(transaction) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<%= link_to "← Back to Dashboard", admin_dashboard_path, class: "button" %>
