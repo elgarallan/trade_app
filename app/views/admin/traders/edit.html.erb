@@ -1,5 +1,9 @@
-<h2>Edit Trader</h2>
+<div class="form-wrapper">
+  <h1>Edit Trader</h1>
 
-<%= render partial: "form", locals: { trader: @trader, form_url: admin_trader_path(@trader) } %>
+  <%= render partial: "form", locals: { trader: @trader, form_url: admin_trader_path(@trader) } %>
 
-<%= link_to "← Back to All Traders", admin_traders_path, class: "button" %>
+  <div class="button-group">
+    <%= link_to "← Back to All Traders", admin_traders_path, class: "cancel-btn" %>
+  </div>
+</div>

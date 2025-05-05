@@ -35,11 +35,12 @@ class Admin::TradersController < ApplicationController
       redirect_to admin_traders_path, alert: "Failed to delete trader."
     end
   end
+
   def show
     @trader = User.find(params[:id])
+    @transactions = @trader.transactions.order(created_at: :desc)
+    @stocks = @trader.stocks
   end
-
-
 
   # Update action to update the existing trader
   def update

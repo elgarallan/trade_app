@@ -1,35 +1,38 @@
-<h2><%= @trader.new_record? ? "New Trader" : "Edit Trader" %></h2>
+<div class="form-wrapper">
+  <h1><%= @trader.new_record? ? "Create New Trader" : "Edit Trader" %></h1>
 
-<%= form_with model: @trader, url: @trader.new_record? ? admin_traders_path : admin_trader_path(@trader), local: true do |form| %>
-  <% if @trader.errors.any? %>
-    <div>
-      <h4><%= pluralize(@trader.errors.count, "error") %> prevented this trader from being saved:</h4>
-      <ul>
-        <% @trader.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+  <%= form_with model: @trader, url: @trader.new_record? ? admin_traders_path : admin_trader_path(@trader), local: true, class: "styled-form" do |form| %>
+    
+    <% if @trader.errors.any? %>
+      <div class="error-box">
+        <h4><%= pluralize(@trader.errors.count, "error") %> prevented this trader from being saved:</h4>
+        <ul>
+          <% @trader.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= form.label :email %>
+      <%= form.email_field :email, required: true %>
     </div>
+
+    <div class="form-group">
+      <%= form.label :password %>
+      <%= form.password_field :password, required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :password_confirmation %>
+      <%= form.password_field :password_confirmation, required: true %>
+    </div>
+
+    <div class="button-group">
+      <%= form.submit @trader.new_record? ? "Create Trader" : "Update Trader", class: "submit-btn" %>
+      <%= link_to "← Back to All Traders", admin_traders_path, class: "cancel-btn" %>
+    </div>
+
   <% end %>
-
-  <div>
-    <%= form.label :email %><br>
-    <%= form.email_field :email %>
-  </div>
-
-  <div>
-    <%= form.label :password %><br>
-    <%= form.password_field :password %>
-  </div>
-
-  <div>
-    <%= form.label :password_confirmation %><br>
-    <%= form.password_field :password_confirmation %>
-  </div>
-
-  <div>
-    <%= form.submit @trader.new_record? ? "Create Trader" : "Update Trader" %>
-  </div>
-  <%= link_to "← Back to All Traders", admin_traders_path, class: "button" %>
-
-<% end %>
+</div>
