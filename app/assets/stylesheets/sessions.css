@@ -20,13 +20,13 @@
   /* Slack-like Logo/Icon */
   .logo {
     font-size: 50px;
-    color: #611f69;
+    color: #0350b6;
     margin-bottom: 10px;
   }
   
   /* Headline Styling */
   h2 {
-    color: #333;
+    color: #0553c0;
     font-size: 24px;
     margin-bottom: 20px;
   }
@@ -48,7 +48,7 @@
   /* Login Button */
   .btn-login {
     width: 100%;
-    background-color: #611f69; 
+    background-color: #0350b6; 
     color: white;
     font-weight: bold;
     border: none;
@@ -61,7 +61,7 @@
   }
   
   .btn-login:hover {
-    background-color: #4a154b;
+    background-color: #033a87;
   }
   
   /* Signup Link */
@@ -71,7 +71,7 @@
   }
   
   .signup-btn {
-    color: #611f69;
+    background-color: #0350b6; 
     font-weight: bold;
     text-decoration: none;
   }

@@ -12,8 +12,16 @@ class User < ApplicationRecord
   admin
  end
 
-# (non-admins are considered traders here)
-def trader?
-  !admin?
- end
+  # Optional: define trader? for clarity (non-admins are considered traders here)
+  def trader?
+    !admin?
+  end
+
+  def active_for_authentication?
+    super && approved?
+  end
+
+  def inactive_message
+    approved? ? super : :not_approved
+  end
 end

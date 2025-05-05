@@ -3,7 +3,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #333;
+    background-color: #0350b6;
     color: white;
     padding: 15px 20px;
   }
@@ -22,7 +22,7 @@
   }
   
   .logout:hover {
-    color: yellow;
+    color: #e6f1fd;
   }
 
   /* Stocks Container */
@@ -42,7 +42,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #f8f9fa;
+    background: #e6f1fd;
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 5px;

@@ -2,11 +2,15 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :admin do
-    resources :transactions, only: [:index, :show]
-    resources :traders, only: [:index, :new, :create, :edit, :update, :destroy, :show]
+    resources :traders do
+      member do
+        patch :approve
+      end
+    end
+    resources :transactions, only: [ :index, :show ]
     get "dashboard", to: "dashboard#index"
   end
-  
+
 
   get "dashboard", to: "dashboard#index"
 
