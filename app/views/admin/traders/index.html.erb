@@ -1,34 +1,60 @@
-<h2>All Traders</h2>
+<!-- Header Container -->
+<div class="header">
+  <!-- Left: Username -->
+  <h1 class="username">Welcome, <%= current_user.email %>!</h1>
 
-<% if @traders.any? %>
-  <table>
-    <thead>
-      <tr>
-        <th>Email</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @traders.each do |trader| %>
-        <tr>
-          <td><%= trader.email %></td>
-          <td>
-           <%= link_to "View", admin_trader_path(trader) %> |
-           <%= link_to "Edit", edit_admin_trader_path(trader) %> |
-           <%= button_to "Delete", admin_trader_path(trader), method: :delete, data: { confirm: "Are you sure you want to delete this trader?" } %>
+  <!-- Right: Logout Button -->
+  <div class="logout-button">
+    <%= link_to 'Sign Out', destroy_user_session_path, data: { turbo_method: :delete }, class: "logout" %>
+  </div>
+</div>
 
+<!-- Stocks Container --> 
+<div class="stocks-container">
 
+  <h2>All Traders</h2>
+   <p><%= link_to "Add New Trader", new_admin_trader_path %><p>
+   <br>
+  
+    <div class="stocks-box">
+      
+          <table class="stock-table">
+            <thead>
+              <tr>
+                <th>Email</th>
+                <th>Status</th>
+                <th>For Approval</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @traders.each do |trader| %>
+                <tr>
+                  <td class="px-4 py-2 border-b"><%= trader.email %></td>
+                  <td class="px-4 py-2 border-b">
+                    <% if trader.approved? %>
+                      ✅ Approved
+                    <% else %>
+                      ❌ Pending
+                    <% end %>
+                  </td>
+                  <td class="px-4 py-2 border-b">
+                    <% unless trader.approved? %>
+                      <%= button_to "Approve", approve_admin_trader_path(trader), method: :patch, class: "bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded" %>
+                    <% end %>
+                  </td>
+                  <td>
+                      <%= link_to "View", admin_trader_path(trader) %> |
+                      <%= link_to "Edit", edit_admin_trader_path(trader) %> |
+                      <%= button_to "Delete", admin_trader_path(trader), method: :delete, data: { confirm: "Are you sure you want to delete this trader?" } %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <br>
+        <%= link_to "← Back to Dashboard", admin_dashboard_path %>
 
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <p>No traders found.</p>
-<% end %>
-
-<br>
-<%= link_to "Create New Trader", new_admin_trader_path %>
-<br>
-<%= link_to "← Back to Dashboard", admin_dashboard_path, class: "button" %>
+    </div>
+  
+</div>

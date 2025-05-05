@@ -1,0 +1,179 @@
+/* General Reset & Font */
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #f0f4f8;
+    color: #0a1f44;
+    line-height: 1.6;
+  }
+  
+  /* Container Layout */
+  .admin-container {
+    display: flex;
+    justify-content: space-between;
+    min-height: 100vh;
+  }
+  
+  
+  /* Sidebar Left */
+  /* Sidebar Container */
+.admin-sidebar {
+    width: 240px;
+    background-color: #0447af;
+    color: #ffffff;
+    padding: 30px 20px;
+    border-right: 1px solid #dbe5f1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  /* Sidebar Title */
+  .admin-sidebar h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #ffffff;
+  }
+  
+  /* Sidebar Navigation List */
+  .admin-sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  /* Sidebar Links */
+  .admin-sidebar a {
+    font-size: 16px;
+    color: #dbeafe;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  
+  .admin-sidebar a:hover {
+    background-color: #0665dd;
+    color: #ffffff;
+  }
+  
+  
+  /* Main Content */
+  .admin-main {
+    flex: 1;
+    padding: 40px;
+    background-color: #ffffff;
+  }
+  
+  .admin-main h1 {
+    font-size: 30px;
+    font-weight: 700;
+    color: #0447af;
+    margin-bottom: 30px;
+  }
+  
+  /* Section Cards */
+  .admin-section {
+    background: #f1f5f9;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+  }
+  
+  .admin-section:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px);
+  }
+  
+  
+  .admin-section h2 {
+    color: #0447af;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  table thead {
+    background-color: #e2efff;
+  }
+  
+  table th,
+  table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #e3e8ee;
+  }
+  
+  /* Right Sidebar */
+.admin-rightbar {
+    width: 260px;
+    background-color: #e0f2fe;
+    padding: 24px;
+    border-left: 1px solid #cbd5e1;
+    color: #0f172a;
+    font-family: Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    
+  }
+  
+  .admin-rightbar h2 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #1e3a8a;
+    margin-bottom: 12px;
+  }
+  
+  .top-stocks {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .top-stocks li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 12px;
+    background-color: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-size: 15px;
+  }
+  
+  .top-stocks li strong {
+    color: #0ea5e9;
+  }
+  
+  .top-stocks li span {
+    color: #047857;
+  }
+  
+  table tbody tr {
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+  }
+  
+  table tbody tr:hover {
+    background-color: #e0f2fe;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: scale(1.01);
+    cursor: pointer;
+  }
+  
+  
