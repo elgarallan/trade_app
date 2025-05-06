@@ -17,21 +17,36 @@
     <h1>Welcome, <%= current_user.email %>!</h1>
 
     <section class="admin-section">
-      <h2>All Users</h2>
+      <h2>All Traders</h2>
       <table>
         <thead>
           <tr>
             <th>Email</th>
+            <th>Status</th>
+            <th>For Approval</th>
           </tr>
         </thead>
         <tbody>
-          <% User.where(admin: false).limit(5).each do |user| %>
-            <tr>
-              <td><%= user.email %></td>
-            </tr>
-          <% end %>
+          <% @traders.each do |trader| %>
+              <tr>
+                <td class="px-4 py-2 border-b"><%= trader.email %></td>
+                <td class="px-4 py-2 border-b">
+                  <% if trader.approved? %>
+                    ✅ Approved
+                  <% else %>
+                    ❌ Pending
+                  <% end %>
+                </td>
+                <td class="px-4 py-2 border-b">
+                  <% unless trader.approved? %>
+                    <%= button_to "Approve", approve_admin_trader_path(trader), method: :patch, class: "approve-button" %>
+                  <% end %>
+                </td>
+              </tr>
+            <%end%>
         </tbody>
       </table>
+      <br>
       <%= link_to "View All Traders", admin_traders_path %>
     </section>
 
@@ -59,6 +74,7 @@
           <% end %>
         </tbody>
       </table>
+      <br>
       <%= link_to "View All Transactions", admin_transactions_path %>
     </section>
   </main>

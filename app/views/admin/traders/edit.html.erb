@@ -2,7 +2,7 @@
   <h1>Edit Trader</h1>
 
   <%= render partial: "form", locals: { trader: @trader, form_url: admin_trader_path(@trader) } %>
-
+  <br>
   <div class="button-group">
     <%= link_to "← Back to All Traders", admin_traders_path, class: "cancel-btn" %>
   </div>
