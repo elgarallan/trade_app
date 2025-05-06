@@ -38,8 +38,8 @@ class Admin::TradersController < ApplicationController
 
   def show
     @trader = User.find(params[:id])
-    @transactions = @trader.transactions.order(created_at: :desc)
     @stocks = @trader.stocks
+    @transactions = @trader.transactions.order(created_at: :desc)
   end
 
   # Update action to update the existing trader
@@ -53,7 +53,7 @@ class Admin::TradersController < ApplicationController
 
   def approve
     if @trader.update(approved: true)
-      UserMailer.approval_email(@trader).deliver_now
+      UserMailer.approval_email(@trader).deliver_later
       redirect_to admin_traders_path, notice: "#{@trader.email} has been approved."
     else
       redirect_to admin_traders_path, alert: "Failed to approve trader."

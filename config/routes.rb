@@ -7,7 +7,9 @@ Rails.application.routes.draw do
         patch :approve
       end
     end
+
     resources :transactions, only: [ :index, :show ]
+
     get "dashboard", to: "dashboard#index"
   end
 

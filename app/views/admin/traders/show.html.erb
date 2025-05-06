@@ -1,59 +1,63 @@
-<h2>Trader Details</h2>
-<p><strong>Email:</strong> <%= @trader.email %></p>
+<div class="admin-main">
+  <div class = "admin-section">
+    <h2>Trader Details</h2>
+    <p><strong>Email:</strong> <%= @trader.email %></p>
 
-<hr>
+    <hr> <br>
 
-<h3>Portfolio</h3>
-<% if @stocks.any? %>
-  <table class="styled-table">
-    <thead>
-      <tr>
-        <th>Symbol</th>
-        <th>Shares</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @stocks.each do |stock| %>
-        <tr>
-          <td><%= stock.symbol %></td>
-          <td><%= stock.shares %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <p>This trader has no stocks in their portfolio.</p>
-<% end %>
+    <h3>Portfolio</h3>
+    <% if @stocks.any? %>
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>Symbol</th>
+            <th>Shares</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @stocks.each do |stock| %>
+            <tr>
+              <td><%= stock.symbol %></td>
+              <td><%= stock.shares %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>This trader has no stocks in their portfolio.</p>
+    <% end %>
 
-<hr>
+    <hr> <br>
 
-<h3>Transaction History</h3>
-<% if @transactions.any? %>
-  <table class="styled-table">
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>Symbol</th>
-        <th>Type</th>
-        <th>Shares</th>
-        <th>Price</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @transactions.each do |tx| %>
-        <tr>
-          <td><%= tx.created_at.strftime("%b %d, %Y") %></td>
-          <td><%= tx.symbol %></td>
-          <td><%= tx.transaction_type.capitalize %></td>
-          <td><%= tx.shares %></td>
-          <td><%= number_to_currency(tx.price) %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <p>This trader has no transactions yet.</p>
-<% end %>
+    <h3>Transaction History</h3>
+    <% if @transactions.any? %>
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Symbol</th>
+            <th>Type</th>
+            <th>Shares</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @transactions.each do |tx| %>
+            <tr>
+              <td><%= tx.created_at.strftime("%b %d, %Y") %></td>
+              <td><%= tx.symbol %></td>
+              <td><%= tx.transaction_type.capitalize %></td>
+              <td><%= tx.shares %></td>
+              <td><%= number_to_currency(tx.price) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>This trader has no transactions yet.</p>
+    <% end %>
 
-<br>
-<%= link_to "← Back to All Traders", admin_traders_path, class: "button" %>
+    <br>
+    <%= link_to "← Back to All Traders", admin_traders_path, class: "button" %>
+  </div>
+</div>
