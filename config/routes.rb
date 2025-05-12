@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :traders do
       member do
-        patch :approve
+        put :approve
       end
     end
 
