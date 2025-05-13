@@ -27,7 +27,9 @@
   <body>
     <% flash.each do |type, msg| %>
       <div style="display:flex; justify-content: center">
-        <p style="color:red"><%= msg %></p>
+        <p style="color: <%= type == "notice" ? 'green' : 'red' %>; font-weight: bold; display: inline-block;">
+      <%= msg %>
+    </p>
       </div>
     <% end %>
     <%= yield %>

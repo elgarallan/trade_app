@@ -77,10 +77,9 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     user_name:      ENV["EMAIL_USER"],
     password:       ENV["EMAIL_PASSWORD"],
-    domain:         "sandbox.mailtrap.io",
-    address:       "sandbox.smtp.mailtrap.io",
-    port:          "2525",
-    authentication: :login,
+    address:       "smtp.gmail.com",
+    port:          "587",
+    authentication: :plain,
     enable_starttls_auto: true
   }
 
