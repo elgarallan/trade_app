@@ -21,6 +21,7 @@ class Admin::TradersController < ApplicationController
 
   def edit
   end
+
   def destroy
     @trader = User.find(params[:id])
     if @trader.stocks.exists? || @trader.transactions.exists?
@@ -54,6 +55,7 @@ class Admin::TradersController < ApplicationController
       redirect_to admin_traders_path, alert: "Failed to approve trader."
     end
   end
+
   private
 
   def set_trader

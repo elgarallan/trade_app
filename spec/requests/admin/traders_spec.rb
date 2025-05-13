@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe "Admin::TradersController", type: :request do
   include Devise::Test::IntegrationHelpers
-
   let(:admin_user) { User.create!(email: "admin@example.com", password: "password", admin: true, approved: true, cash_balance: 10_000) }
   let(:trader_user) { User.create!(email: "trader@example.com", password: "password", admin: false, approved: true, cash_balance: 10_000) }
   let(:unapproved_trader) { User.create!(email: "unapproved@example.com", password: "password", admin: false, approved: false, cash_balance: 10_000) }
