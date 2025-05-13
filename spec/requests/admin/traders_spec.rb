@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe "Admin::TradersController", type: :request do
   include Devise::Test::IntegrationHelpers
-  
   let(:admin_user) { User.create!(email: "admin@example.com", password: "password", admin: true, approved: true, cash_balance: 10_000) }
   let(:trader_user) { User.create!(email: "trader@example.com", password: "password", admin: false, approved: true, cash_balance: 10_000) }
   let(:unapproved_trader) { User.create!(email: "unapproved@example.com", password: "password", admin: false, approved: false, cash_balance: 10_000) }
@@ -16,28 +15,25 @@ RSpec.describe "Admin::TradersController", type: :request do
 
   describe "Authentication" do
     it "requires authentication for all actions" do
-      
       get admin_traders_path
       expect(response).to redirect_to(new_user_session_path)
-      
+
       get new_admin_trader_path
       expect(response).to redirect_to(new_user_session_path)
-      
+
       post admin_traders_path, params: { user: valid_attributes }
       expect(response).to redirect_to(new_user_session_path)
     end
   end
 
   describe "Authorization" do
-    
     it "should require admin access for traders management" do
-      
       sign_in trader_user, scope: :user
-      
+
       get admin_traders_path
-      
+
       expect(response).to have_http_status(:ok)
-      
+
       get new_admin_trader_path
       expect(response).to have_http_status(:ok)
     end
@@ -49,11 +45,11 @@ RSpec.describe "Admin::TradersController", type: :request do
       get admin_traders_path
       expect(response).to have_http_status(:ok)
     end
-    
+
     it "renders the traders index page" do
       sign_in admin_user, scope: :user
       get admin_traders_path
-      
+
       expect(response.body).to include("All Traders")
       expect(response.body).to include("Add New Trader")
       expect(response.body).to include("Email")
@@ -83,11 +79,11 @@ RSpec.describe "Admin::TradersController", type: :request do
       get admin_trader_path(trader_user)
       expect(response).to have_http_status(:ok)
     end
-    
+
     it "displays trader's portfolio and transaction history" do
       sign_in admin_user, scope: :user
       get admin_trader_path(trader_user)
-      
+
       expect(response.body).to include("Portfolio")
       expect(response.body).to include("Transaction History")
       expect(response.body).to include("trader@example.com")
@@ -118,14 +114,14 @@ RSpec.describe "Admin::TradersController", type: :request do
     end
   end
 
-  describe "PUT /admin/traders/:id" do
+  describe "PATCH /admin/traders/:id" do
     let(:new_attributes) {
       { email: "updated_trader@example.com" }
     }
 
     it "updates the trader" do
       sign_in admin_user, scope: :user
-      put admin_trader_path(trader_user), params: { user: new_attributes }
+      patch admin_trader_path(trader_user), params: { user: new_attributes }
       trader_user.reload
       expect(trader_user.email).to eq("updated_trader@example.com")
       expect(response).to redirect_to(admin_traders_path)
@@ -135,7 +131,7 @@ RSpec.describe "Admin::TradersController", type: :request do
 
     it "fails to update with invalid attributes" do
       sign_in admin_user, scope: :user
-      put admin_trader_path(trader_user), params: { user: { email: "" } }
+      patch admin_trader_path(trader_user), params: { user: { email: "" } }
       expect(response).to have_http_status(:ok) # renders :edit
       expect(flash[:alert]).to include("Update failed")
     end
@@ -154,21 +150,20 @@ RSpec.describe "Admin::TradersController", type: :request do
     end
   end
 
-  describe "PUT /admin/traders/:id/approve" do
-    
+  describe "PATCH /admin/traders/:id/approve" do
     it "calls the approve action for the trader" do
       sign_in admin_user, scope: :user
-      
+
       expect(unapproved_trader.approved).to eq(false)
-      
-      put approve_admin_trader_path(unapproved_trader)
-      
+
+      patch approve_admin_trader_path(unapproved_trader)
+
       expect(response).to redirect_to(admin_traders_path)
-      
+
       unapproved_trader.reload
-      
+
       expect(unapproved_trader.approved).to eq(true)
-      
+
       follow_redirect!
       expect(flash[:notice]).to include("has been approved")
     end

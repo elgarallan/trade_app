@@ -65,7 +65,6 @@ RSpec.describe "Admin::TransactionsController", type: :request do
       get admin_transactions_path
 
       expect(response).to have_http_status(:ok)
-      
     end
   end
 

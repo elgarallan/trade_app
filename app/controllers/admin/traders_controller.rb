@@ -1,15 +1,15 @@
 class Admin::TradersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_trader, only: [ :show, :edit, :update, :destroy, :approve ]
-  
+
   def index
     @traders = User.where(admin: false)
   end
-  
+
   def new
     @trader = User.new
   end
-  
+
   def create
     @trader = User.new(trader_params)
     if @trader.save
@@ -18,10 +18,10 @@ class Admin::TradersController < ApplicationController
       render :new
     end
   end
-  
+
   def edit
-   
   end
+
   def destroy
     @trader = User.find(params[:id])
     if @trader.stocks.exists? || @trader.transactions.exists?
@@ -36,16 +36,16 @@ class Admin::TradersController < ApplicationController
     @stocks = @trader.stocks
     @transactions = @trader.transactions.order(created_at: :desc)
   end
-  
- def update
-  @trader = User.find(params[:id])
-  if @trader.update(trader_params)
-    redirect_to admin_traders_path, notice: 'Trader updated successfully.'
-  else
-    flash.now[:alert] = 'Update failed.'
-    render :edit, status: :ok
+
+  def update
+    @trader = User.find(params[:id])
+    if @trader.update(trader_params)
+      redirect_to admin_traders_path, notice: "Trader updated successfully."
+    else
+      flash.now[:alert] = "Update failed."
+      render :edit, status: :ok
+    end
   end
-end
 
   def approve
     if @trader.update(approved: true)
@@ -55,12 +55,13 @@ end
       redirect_to admin_traders_path, alert: "Failed to approve trader."
     end
   end
+
   private
-  
+
   def set_trader
     @trader = User.find(params[:id])
   end
-  
+
   def trader_params
     params.require(:user).permit(:email, :password, :password_confirmation)
   end

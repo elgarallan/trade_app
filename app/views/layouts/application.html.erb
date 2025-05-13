@@ -25,15 +25,13 @@
   </head>
 
   <body>
-  <% flash.each do |type, message| %>
-  <div style="text-align: center; margin-top: 1rem;">
-    <p style="color: <%= type == "notice" ? 'green' : 'red' %>; font-weight: bold; display: inline-block;">
-      <%= message %>
+    <% flash.each do |type, msg| %>
+      <div style="display:flex; justify-content: center">
+        <p style="color: <%= type == "notice" ? 'green' : 'red' %>; font-weight: bold; display: inline-block;">
+      <%= msg %>
     </p>
-  </div>
-<% end %>
-
-
+      </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>
