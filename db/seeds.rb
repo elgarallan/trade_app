@@ -13,5 +13,3 @@ User.create!(
   password_confirmation: "password123",
   admin: true
 )
-
-puts "Seeded admin: #{user.email}"
