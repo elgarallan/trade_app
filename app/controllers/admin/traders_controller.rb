@@ -49,7 +49,7 @@ class Admin::TradersController < ApplicationController
 
   def approve
     if @trader.update(approved: true)
-      UserMailer.approval_email(@trader).deliver_later
+      UserMailer.approval_email(@trader).deliver_now
       redirect_to admin_traders_path, notice: "#{@trader.email} has been approved."
     else
       redirect_to admin_traders_path, alert: "Failed to approve trader."
